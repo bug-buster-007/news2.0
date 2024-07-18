@@ -13,3 +13,4 @@ MONTHS = {
     'Nov': 11,
     'Dec': 12,
 }
+DOLLAR_KEYWORDS = {'$', 'dollars', 'USD'}
