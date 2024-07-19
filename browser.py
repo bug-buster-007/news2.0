@@ -5,8 +5,10 @@ Module contains all browser related operations and classes
 from RPA.Browser.Selenium import Selenium
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 
-from constants import BASE_URL, MONTHS
+from constants import BASE_URL, MONTHS, WAIT_TIME
 from utils import get_previous_nth_month
 
 
@@ -72,11 +74,16 @@ class Browser:
 
         self._driver = self._browser.driver
         news_set = set()
+        search_summary_element = WebDriverWait(self._driver, WAIT_TIME).until(
+            EC.presence_of_element_located(
+                (
+                    By.CLASS_NAME,
+                    'search-summary__query',
+                )
+            )
+        )
 
-        if (
-            self._driver.find_element(By.CLASS_NAME, 'search-summary__query')
-            == 'About 0 results'
-        ):
+        if search_summary_element.text == 'About 0 results':
             # return empty list if no matchings found
             return []
 

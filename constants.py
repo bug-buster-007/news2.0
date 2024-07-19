@@ -14,3 +14,4 @@ MONTHS = {
     'Dec': 12,
 }
 DOLLAR_KEYWORDS = {'$', 'dollars', 'USD'}
+WAIT_TIME = 10
